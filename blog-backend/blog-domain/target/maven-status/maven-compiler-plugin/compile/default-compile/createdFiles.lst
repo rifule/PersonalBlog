@@ -1,0 +1,17 @@
+com\blog\domain\vo\ArticleVO.class
+com\blog\domain\entity\Category.class
+com\blog\domain\dto\UserDTO.class
+com\blog\domain\repository\UserRepository.class
+com\blog\domain\dto\LoginDTO.class
+com\blog\domain\entity\Article.class
+com\blog\domain\enums\UserRole.class
+com\blog\domain\entity\Tag.class
+com\blog\domain\enums\FileType.class
+com\blog\domain\entity\Comment.class
+com\blog\domain\repository\TagRepository.class
+com\blog\domain\repository\ArticleRepository.class
+com\blog\domain\dto\ArticleDTO.class
+com\blog\domain\entity\User.class
+com\blog\domain\vo\UserVO.class
+com\blog\domain\vo\ArticleListVO.class
+com\blog\domain\repository\CategoryRepository.class

@@ -1,0 +1,1 @@
+import{A as e}from"./index-Ci5ymk4f.js";const g=()=>e.get("/tags"),r=t=>e.get(`/tags/${t}`),n=t=>e.post("/tags",t),o=(t,a)=>e.put(`/tags/${t}`,a),u=t=>e.delete(`/tags/${t}`);export{r as a,n as c,u as d,g,o as u};

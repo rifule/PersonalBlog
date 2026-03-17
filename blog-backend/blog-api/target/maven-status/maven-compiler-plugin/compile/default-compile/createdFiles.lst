@@ -1,0 +1,9 @@
+com\blog\api\controller\AuthController.class
+com\blog\api\controller\UserController.class
+com\blog\api\controller\admin\AdminCategoryController.class
+com\blog\api\controller\TagController.class
+com\blog\api\controller\CategoryController.class
+com\blog\api\BlogApiApplication.class
+com\blog\api\controller\admin\AdminArticleController.class
+com\blog\api\controller\ArticleController.class
+com\blog\api\controller\admin\AdminFileController.class

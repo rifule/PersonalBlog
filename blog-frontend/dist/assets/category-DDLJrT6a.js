@@ -1,0 +1,1 @@
+import{A as t}from"./index-Ci5ymk4f.js";const o=()=>t.get("/categories"),s=e=>t.get(`/categories/${e}`),g=e=>t.post("/categories",e),c=(e,r)=>t.put(`/categories/${e}`,r),n=e=>t.delete(`/categories/${e}`);export{s as a,g as c,n as d,o as g,c as u};

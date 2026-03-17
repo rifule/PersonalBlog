@@ -1,0 +1,141 @@
+:root {
+  // GitHub 风格颜色变量
+  --color-canvas-default: #ffffff;
+  --color-canvas-subtle: #f6f8fa;
+  --color-canvas-inset: #f6f8fa;
+  --color-border-default: #d0d7de;
+  --color-border-muted: #d8dee4;
+  --color-fg-default: #24292f;
+  --color-fg-muted: #57606a;
+  --color-fg-subtle: #6e7781;
+  --color-accent-fg: #0969da;
+  --color-accent-emphasis: #0969da;
+  --color-accent-muted: #ddf4ff;
+  --color-accent-subtle: #ddf4ff;
+  --color-success-fg: #1a7f37;
+  --color-danger-fg: #cf222e;
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(208,215,222,0.2);
+  --color-primer-shadow-focus: 0 0 0 3px rgba(9,105,218,0.3);
+  
+  // 二次元风格变量
+  --anime-primary: #ff6b9d;
+  --anime-secondary: #c44569;
+  --anime-accent: #f8b500;
+  --anime-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --anime-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+  
+  // 背景透明度
+  --bg-opacity: 0.1;
+}
+
+.dark {
+  --color-canvas-default: #0d1117;
+  --color-canvas-subtle: #161b22;
+  --color-canvas-inset: #010409;
+  --color-border-default: #30363d;
+  --color-border-muted: #21262d;
+  --color-fg-default: #c9d1d9;
+  --color-fg-muted: #8b949e;
+  --color-fg-subtle: #6e7681;
+  --color-accent-fg: #58a6ff;
+  --color-accent-emphasis: #1f6feb;
+  --color-accent-muted: rgba(56,139,253,0.4);
+  --color-accent-subtle: rgba(56,139,253,0.15);
+  --color-success-fg: #3fb950;
+  --color-danger-fg: #f85149;
+  --color-primer-shadow-inset: 0 0 transparent;
+  --color-primer-shadow-focus: 0 0 0 3px rgba(31,111,235,0.3);
+  
+  // 暗色模式二次元风格
+  --anime-primary: #ff8fab;
+  --anime-secondary: #fb6f92;
+  --anime-accent: #ffd60a;
+  --anime-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --anime-shadow: 0 4px 15px rgba(255, 143, 171, 0.3);
+}
+
+// 通用样式
+.github-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.github-card {
+  background-color: var(--color-canvas-default);
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  box-shadow: var(--color-primer-shadow-inset);
+}
+
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--color-border-default);
+  border-radius: 6px;
+  appearance: none;
+  background-color: var(--color-canvas-default);
+  color: var(--color-fg-default);
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: var(--color-canvas-subtle);
+    border-color: var(--color-border-muted);
+  }
+  
+  &.primary {
+    color: #ffffff;
+    background-color: var(--color-accent-emphasis);
+    border-color: rgba(27,31,36,0.15);
+    
+    &:hover {
+      background-color: #0860ca;
+    }
+  }
+}
+
+// 二次元装饰元素
+.anime-decoration {
+  position: relative;
+  
+  &::before {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    animation: sparkle 2s infinite;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-canvas-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 4px;
+  
+  &:hover {
+    background: var(--color-fg-muted);
+  }
+}

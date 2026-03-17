@@ -1,0 +1,273 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-fg-default);
+  background-color: var(--color-canvas-default);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// 背景图片容器
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: var(--bg-opacity);
+    transition: opacity 0.3s;
+  }
+  
+  .background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-canvas-default);
+    opacity: calc(1 - var(--bg-opacity));
+  }
+}
+
+// 链接样式
+a {
+  color: var(--color-accent-fg);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// 代码样式
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 85%;
+  background-color: var(--color-canvas-subtle);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  background-color: var(--color-canvas-subtle);
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  
+  code {
+    background: none;
+    padding: 0;
+  }
+}
+
+// 表格样式
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-default);
+    text-align: left;
+  }
+  
+  th {
+    background-color: var(--color-canvas-subtle);
+    font-weight: 600;
+  }
+  
+  tr:nth-child(even) {
+    background-color: var(--color-canvas-subtle);
+  }
+}
+
+// 列表样式
+ul, ol {
+  padding-left: 2em;
+  margin: 16px 0;
+}
+
+li {
+  margin: 4px 0;
+}
+
+// 标题样式
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 { font-size: 2em; border-bottom: 1px solid var(--color-border-muted); padding-bottom: 0.3em; }
+h2 { font-size: 1.5em; border-bottom: 1px solid var(--color-border-muted); padding-bottom: 0.3em; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1em; }
+h5 { font-size: 0.875em; }
+h6 { font-size: 0.85em; color: var(--color-fg-muted); }
+
+// 段落样式
+p {
+  margin: 16px 0;
+}
+
+// 引用样式
+blockquote {
+  margin: 16px 0;
+  padding: 0 1em;
+  color: var(--color-fg-muted);
+  border-left: 0.25em solid var(--color-border-default);
+}
+
+// 分割线
+hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: var(--color-border-default);
+  border: 0;
+}
+
+// 图片样式
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+// 动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+// Element Plus 暗色模式适配
+html.dark {
+  // 表格样式
+  .el-table {
+    background-color: var(--color-canvas-default) !important;
+    color: var(--color-fg-default) !important;
+
+    &__header {
+      th.el-table__cell {
+        background-color: var(--color-canvas-subtle) !important;
+        color: var(--color-fg-default) !important;
+        border-bottom-color: var(--color-border-default) !important;
+      }
+    }
+
+    &__body {
+      tr.el-table__row {
+        background-color: var(--color-canvas-default) !important;
+
+        &:hover > td.el-table__cell {
+          background-color: var(--color-canvas-subtle) !important;
+        }
+      }
+
+      td.el-table__cell {
+        background-color: var(--color-canvas-default) !important;
+        color: var(--color-fg-default) !important;
+        border-bottom-color: var(--color-border-muted) !important;
+      }
+    }
+
+    &::before {
+      background-color: var(--color-border-default) !important;
+    }
+  }
+
+  // 输入框样式
+  .el-input {
+    &__wrapper {
+      background-color: var(--color-canvas-subtle) !important;
+      box-shadow: 0 0 0 1px var(--color-border-default) inset !important;
+    }
+
+    &__inner {
+      color: var(--color-fg-default) !important;
+      background-color: transparent !important;
+
+      &::placeholder {
+        color: var(--color-fg-muted) !important;
+      }
+    }
+  }
+
+  // 文本域样式
+  .el-textarea {
+    &__inner {
+      background-color: var(--color-canvas-subtle) !important;
+      color: var(--color-fg-default) !important;
+      border-color: var(--color-border-default) !important;
+
+      &::placeholder {
+        color: var(--color-fg-muted) !important;
+      }
+    }
+  }
+
+  // 选择器样式
+  .el-select {
+    .el-input__wrapper {
+      background-color: var(--color-canvas-subtle) !important;
+    }
+  }
+
+  // 下拉菜单样式
+  .el-select-dropdown {
+    background-color: var(--color-canvas-default) !important;
+    border-color: var(--color-border-default) !important;
+
+    .el-select-dropdown__item {
+      color: var(--color-fg-default) !important;
+
+      &:hover,
+      &.selected {
+        background-color: var(--color-canvas-subtle) !important;
+      }
+    }
+  }
+
+  // 数字输入框
+  .el-input-number {
+    .el-input__wrapper {
+      background-color: var(--color-canvas-subtle) !important;
+    }
+  }
+}

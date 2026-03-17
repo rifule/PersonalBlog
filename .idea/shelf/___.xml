@@ -1,0 +1,239 @@
+<changelist name="在变基之前未提交的更改_[更改]" date="1773689280867" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/shelved.patch" />
+  <option name="DESCRIPTION" value="在变基之前未提交的更改 [更改]" />
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/blog-domain-1.0.0.jar" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/blog-domain-1.0.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-domain-1.0.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/AuthController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/AuthController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/AuthController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/TagServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/TagServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/TagServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/ArticleServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/ArticleServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/ArticleServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/blog-application-1.0.0.jar" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/blog-application-1.0.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-application-1.0.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/CategoryServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/CategoryServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/CategoryServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/WebMvcConfig.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/WebMvcConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/WebMvcConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminCategoryController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminCategoryController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/AdminCategoryController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/CustomUserDetails.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/CustomUserDetails.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/CustomUserDetails.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/UserController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/UserController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/UserService.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/UserService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/result/ResultCode.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/result/ResultCode.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/ResultCode.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/MyMetaObjectHandler.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/MyMetaObjectHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/MyMetaObjectHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/TagService.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/TagService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/TagService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/blog-common-1.0.0.jar" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/blog-common-1.0.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-common-1.0.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/blog-infrastructure-1.0.0.jar" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/blog-infrastructure-1.0.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-infrastructure-1.0.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/UserDetailsServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/UserDetailsServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserDetailsServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/entity/User.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/entity/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/TagRepository.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/TagRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/TagRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/Knife4jConfig.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/Knife4jConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/Knife4jConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/CategoryController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/CategoryController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/CategoryController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminFileController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminFileController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/AdminFileController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/utils/PageResult.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/utils/PageResult.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/PageResult.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/utils/JwtUtil.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/utils/JwtUtil.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/JwtUtil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/dto/UserDTO.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/dto/UserDTO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserDTO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/SecurityConfig.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/SecurityConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/SecurityConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminArticleController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/admin/AdminArticleController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/AdminArticleController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/FileService.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/FileService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/FileService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/BlogApiApplication.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/BlogApiApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/BlogApiApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/entity/Tag.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/entity/Tag.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/Tag.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/ArticleService.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/ArticleService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/ArticleService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/FileServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/FileServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/FileServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/ArticleRepository.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/ArticleRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/ArticleRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/SecurityUtils.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/SecurityUtils.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/SecurityUtils.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/TagController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/TagController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/TagController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/UserRepository.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/repository/UserRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/exception/GlobalExceptionHandler.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/exception/GlobalExceptionHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/GlobalExceptionHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/CategoryService.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/CategoryService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/CategoryService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/blog-api-1.0.0.jar.original" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/blog-api-1.0.0.jar.original" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-api-1.0.0.jar.original" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/vo/UserVO.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-domain/target/classes/com/blog/domain/vo/UserVO.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserVO.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/blog-api-1.0.0.jar" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/blog-api-1.0.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/blog-api-1.0.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/ArticleController.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-api/target/classes/com/blog/api/controller/ArticleController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/ArticleController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/UserServiceImpl.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-application/target/classes/com/blog/application/service/impl/UserServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/UserServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/MyBatisPlusConfig.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/config/MyBatisPlusConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/MyBatisPlusConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/result/Result.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/result/Result.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/Result.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/exception/BusinessException.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-common/target/classes/com/blog/common/exception/BusinessException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/BusinessException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/JwtAuthenticationFilter.class" />
+    <option name="AFTER_PATH" value="blog-backend/blog-infrastructure/target/classes/com/blog/infrastructure/security/JwtAuthenticationFilter.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/JwtAuthenticationFilter.class" />
+  </binary>
+</changelist>
