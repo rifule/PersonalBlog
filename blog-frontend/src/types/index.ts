@@ -2,11 +2,13 @@
 export interface User {
   id: number
   username: string
+  nickname?: string
   email: string
   avatar: string
   role: string
   status: number
   createTime: string
+  githubUrl?: string
 }
 
 export interface LoginForm {

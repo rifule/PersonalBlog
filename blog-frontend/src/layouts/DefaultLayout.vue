@@ -13,14 +13,6 @@
     <main class="main-content">
       <div class="github-container">
         <div class="content-wrapper">
-          <!-- 侧边栏 -->
-          <aside class="sidebar">
-            <UserCard />
-            <CalendarWidget />
-            <CategoryList />
-            <TagCloud />
-          </aside>
-          
           <!-- 主内容 -->
           <div class="main-area">
             <router-view v-slot="{ Component }">
@@ -29,6 +21,14 @@
               </transition>
             </router-view>
           </div>
+
+          <!-- 右侧侧边栏 -->
+          <aside class="sidebar">
+            <UserCard />
+            <CalendarWidget />
+            <CategoryList />
+            <TagCloud />
+          </aside>
         </div>
       </div>
     </main>
@@ -76,7 +76,7 @@ const themeStore = useThemeStore()
 
 .content-wrapper {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 1fr 300px;
   gap: 40px;
   align-items: start;
 }
@@ -95,7 +95,7 @@ const themeStore = useThemeStore()
 
 @media (max-width: 1200px) {
   .content-wrapper {
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 1fr 260px;
     gap: 24px;
   }
 }

@@ -57,7 +57,7 @@
         </button>
 
         <!-- GitHub 链接 -->
-        <a href="https://github.com" target="_blank" class="action-btn">
+        <a href="https://github.com/rifule" target="_blank" class="action-btn">
           <svg viewBox="0 0 24 24" width="18" height="18">
             <path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/>
           </svg>
@@ -142,7 +142,7 @@ const handleLogout = async () => {
 <style scoped lang="scss">
 .app-header {
   height: 64px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: #1b1b1f;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: sticky;
   top: 0;
@@ -150,9 +150,8 @@ const handleLogout = async () => {
 }
 
 .header-content {
-  max-width: 1400px;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
   padding: 0 24px;
   display: flex;
   align-items: center;
@@ -160,11 +159,29 @@ const handleLogout = async () => {
 }
 
 .logo {
+  flex-shrink: 0;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nav-menu {
+  flex-shrink: 0;
+}
+
+.header-actions {
+  flex-shrink: 0;
+}
+
+.logo {
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #fff;
+  color: #e64040;
   font-size: 18px;
   font-weight: 600;
   flex-shrink: 0;
@@ -181,8 +198,6 @@ const handleLogout = async () => {
 
 .search-box {
   position: relative;
-  width: 280px;
-  flex-shrink: 0;
 
   :deep(.el-input__wrapper) {
     background-color: rgba(255, 255, 255, 0.1);
@@ -229,8 +244,6 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1;
-  justify-content: flex-end;
 }
 
 .nav-item {
@@ -294,6 +307,22 @@ const handleLogout = async () => {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 1024px) {
+  .search-box {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-box {
+    display: none;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+}
+
 .action-btn {
   display: flex;
   align-items: center;
@@ -326,28 +355,5 @@ const handleLogout = async () => {
   }
 }
 
-@media (max-width: 1024px) {
-  .search-box {
-    width: 200px;
-  }
 
-  .nav-menu {
-    gap: 4px;
-  }
-
-  .nav-item, .nav-dropdown-trigger {
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-box {
-    display: none;
-  }
-
-  .nav-menu {
-    display: none;
-  }
-}
 </style>

@@ -288,7 +288,7 @@ const passwordRules: FormRules = {
 }
 
 const setTheme = (theme: 'light' | 'dark') => {
-  themeStore.setTheme(theme)
+  themeStore.setTheme(theme === 'dark')
   ElMessage.success(`已切换到${theme === 'dark' ? '深色' : '浅色'}主题`)
 }
 

@@ -33,24 +33,28 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   (response) => {
     const res = response.data
-    
+
     // 如果响应码不是 200，说明有错误
     if (res.code !== 200) {
+      // 静默处理未登录错误
+      if (res.code === 401) {
+        return Promise.reject(new Error(res.message || '请求失败'))
+      }
       ElMessage.error(res.message || '请求失败')
       return Promise.reject(new Error(res.message || '请求失败'))
     }
-    
+
     return res
   },
   (error) => {
     const { response } = error
-    
+
     if (response) {
       const { status, data } = response
-      
+
       switch (status) {
         case 401:
-          ElMessage.error('登录已过期，请重新登录')
+          // 静默处理未登录错误
           break
         case 403:
           ElMessage.error('没有权限执行此操作')
@@ -67,7 +71,7 @@ request.interceptors.response.use(
     } else {
       ElMessage.error('网络错误，请检查网络连接')
     }
-    
+
     return Promise.reject(error)
   }
 )

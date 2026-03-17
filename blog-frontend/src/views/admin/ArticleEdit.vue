@@ -5,75 +5,84 @@
       <div class="header-actions">
         <el-button @click="$router.back()">取消</el-button>
         <el-button type="primary" @click="saveArticle" :loading="saving">
-          保存
+          {{ isEdit ? '保存' : '发布' }}
         </el-button>
       </div>
     </div>
 
-    <div class="edit-form github-card">
-      <el-form :model="form" label-position="top">
-        <el-form-item label="标题">
-          <el-input v-model="form.title" placeholder="请输入文章标题" size="large" />
-        </el-form-item>
+    <div class="edit-form">
+      <!-- 简化表单区域 -->
+      <div class="meta-form github-card">
+        <el-input
+          v-model="form.title"
+          placeholder="请输入文章标题"
+          class="title-input"
+        />
 
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="分类">
-              <el-select v-model="form.categoryId" placeholder="选择分类" style="width: 100%">
-                <el-option
-                  v-for="category in categories"
-                  :key="category.id"
-                  :label="category.name"
-                  :value="category.id"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="标签">
-              <el-select
-                v-model="form.tags"
-                multiple
-                placeholder="选择标签"
-                style="width: 100%"
-              >
-                <el-option
-                  v-for="tag in tags"
-                  :key="tag.id"
-                  :label="tag.name"
-                  :value="tag.name"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-        </el-row>
+        <div class="meta-row">
+          <el-select
+            v-model="form.categoryId"
+            placeholder="选择分类"
+            clearable
+            class="meta-select"
+          >
+            <el-option
+              v-for="category in categories"
+              :key="category.id"
+              :label="category.name"
+              :value="category.id"
+            />
+          </el-select>
 
-        <el-form-item label="摘要">
+          <el-select
+            v-model="form.tags"
+            multiple
+            placeholder="选择标签"
+            clearable
+            collapse-tags
+            collapse-tags-tooltip
+            class="meta-select"
+          >
+            <el-option
+              v-for="tag in tags"
+              :key="tag.id"
+              :label="tag.name"
+              :value="tag.name"
+            >
+              <div class="tag-option">
+                <span class="tag-color" :style="{ backgroundColor: tag.color || '#909399' }"></span>
+                <span>{{ tag.name }}</span>
+              </div>
+            </el-option>
+          </el-select>
+
           <el-input
             v-model="form.summary"
-            type="textarea"
-            :rows="3"
-            placeholder="请输入文章摘要"
+            placeholder="文章摘要（可选）"
+            class="summary-input"
           />
-        </el-form-item>
+        </div>
+      </div>
 
-        <el-form-item label="内容" class="content-editor">
-          <el-tabs v-model="activeTab" class="editor-tabs">
-            <el-tab-pane label="编辑" name="edit">
-              <el-input
-                v-model="form.content"
-                type="textarea"
-                :rows="30"
-                class="markdown-editor"
-                placeholder="请输入 Markdown 格式的文章内容"
-              />
-            </el-tab-pane>
-            <el-tab-pane label="预览" name="preview">
-              <div class="preview-content markdown-body" v-html="renderedContent"></div>
-            </el-tab-pane>
-          </el-tabs>
-        </el-form-item>
-      </el-form>
+      <!-- 主要内容编辑区域 - 左右分栏实时预览 -->
+      <div class="content-editor github-card">
+        <div class="editor-container">
+          <div class="editor-pane">
+            <div class="pane-header">编辑</div>
+            <el-input
+              v-model="form.content"
+              type="textarea"
+              :rows="35"
+              class="markdown-editor"
+              placeholder="请输入 Markdown 格式的文章内容"
+            />
+          </div>
+          <div class="preview-pane">
+            <div class="pane-header">预览</div>
+            <div class="preview-content markdown-body" v-html="renderedContent"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -93,7 +102,6 @@ const router = useRouter()
 
 const isEdit = computed(() => !!route.params.id)
 const saving = ref(false)
-const activeTab = ref('edit')
 const categories = ref<Category[]>([])
 const tags = ref<Tag[]>([])
 const loading = ref(false)
@@ -117,11 +125,11 @@ const fetchArticle = async () => {
   loading.value = true
   try {
     const res = await getArticleById(id)
-    const article = res.data
-    // 将逗号分隔的标签字符串转换为数组
+    const article = res.data as any
+    const tags = article.tags
     form.value = {
       ...article,
-      tags: article.tags ? article.tags.split(',') : []
+      tags: typeof tags === 'string' ? tags.split(',') : tags || []
     }
   } catch (error) {
     ElMessage.error('获取文章失败')
@@ -158,11 +166,10 @@ const saveArticle = async () => {
 
   saving.value = true
   try {
-    // 将标签数组转换为逗号分隔的字符串
     const articleData = {
       ...form.value,
-      tags: form.value.tags?.join(',') || ''
-    }
+      tags: Array.isArray(form.value.tags) ? form.value.tags.join(',') : ''
+    } as any
 
     if (isEdit.value && route.params.id) {
       await updateArticle(parseInt(route.params.id as string), articleData)
@@ -210,39 +217,130 @@ onMounted(() => {
 }
 
 .edit-form {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.content-editor {
-  :deep(.el-form-item__content) {
-    width: 100%;
+.meta-form {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title-input {
+  :deep(.el-input__wrapper) {
+    box-shadow: none;
+    background: transparent;
+    border: none;
+  }
+
+  :deep(.el-input__inner) {
+    font-size: 24px;
+    font-weight: 600;
   }
 }
 
-.editor-tabs {
-  width: 100%;
+.meta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
-  :deep(.el-tabs__content) {
-    min-height: 600px;
+.meta-select {
+  width: 180px;
+
+  :deep(.el-select__wrapper) {
+    background-color: var(--color-canvas-subtle);
   }
+}
+
+.tag-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+:deep(.el-select__selected-item) {
+  .el-tag {
+    background-color: var(--color-canvas-subtle);
+    border-color: var(--color-border-default);
+    color: var(--color-fg-default);
+
+    .el-tag__close {
+      color: var(--color-fg-muted);
+
+      &:hover {
+        background-color: var(--color-accent-subtle);
+        color: var(--color-accent-fg);
+      }
+    }
+  }
+}
+
+.summary-input {
+  flex: 1;
+  min-width: 200px;
+
+  :deep(.el-input__wrapper) {
+    background-color: var(--color-canvas-subtle);
+  }
+}
+
+.editor-container {
+  display: flex;
+  gap: 16px;
+  height: 700px;
+}
+
+.editor-pane,
+.preview-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pane-header {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  border-bottom: 1px solid var(--color-border-default);
 }
 
 .markdown-editor {
+  flex: 1;
+  border: none;
+
   :deep(.el-textarea__inner) {
-    min-height: 600px !important;
+    height: 100%;
+    min-height: 100% !important;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
     font-size: 14px;
     line-height: 1.6;
+    background-color: var(--color-canvas-subtle);
+    border: none;
+    border-radius: 0;
+    resize: none;
   }
 }
 
-.preview-content {
-  min-height: 600px;
-  max-height: 800px;
-  overflow-y: auto;
-  padding: 24px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  background-color: var(--color-canvas-default);
+.preview-pane {
+  .preview-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background-color: var(--color-canvas-default);
+  }
 }
 </style>

@@ -16,20 +16,20 @@
   --color-danger-fg: #cf222e;
   --color-primer-shadow-inset: inset 0 1px 0 rgba(208,215,222,0.2);
   --color-primer-shadow-focus: 0 0 0 3px rgba(9,105,218,0.3);
-  
+
   // 二次元风格变量
   --anime-primary: #ff6b9d;
   --anime-secondary: #c44569;
   --anime-accent: #f8b500;
-  --anime-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --anime-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
   --anime-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-  
+
   // 背景透明度
   --bg-opacity: 0.1;
 }
 
 .dark {
-  --color-canvas-default: #0d1117;
+  --color-canvas-default: #1a1b1d;
   --color-canvas-subtle: #161b22;
   --color-canvas-inset: #010409;
   --color-border-default: #30363d;

@@ -27,17 +27,17 @@
         <span>{{ userInfo.email }}</span>
       </div>
 
-      <div class="user-links">
-        <a :href="userInfo.githubUrl" class="social-link" title="GitHub" v-if="userInfo.githubUrl" target="_blank">
-          <el-icon size="20"><Platform /></el-icon>
-        </a>
+      <div class="tech-clock">
+        <div class="clock-time">{{ currentTime }}</div>
+        <div class="clock-date">{{ currentDate }}</div>
+        <div class="clock-weekday">{{ currentWeekday }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getCurrentUser } from '@/api/auth'
 import { getCategoryList } from '@/api/category'
@@ -59,7 +59,6 @@ const DEFAULT_EMAIL = '1437178240@qq.com'
 const userInfo = ref<UserInfo>({
   username: '伊苏',
   avatar: DEFAULT_AVATAR,
-  bio: '热爱编程，热爱生活 ✨',
   email: DEFAULT_EMAIL
 })
 const stats = ref({
@@ -67,6 +66,28 @@ const stats = ref({
   categoryCount: 0,
   tagCount: 0
 })
+
+const currentTime = ref('')
+const currentDate = ref('')
+const currentWeekday = ref('')
+let timer: number | null = null
+
+const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+
+const updateTime = () => {
+  const now = new Date()
+  currentTime.value = now.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: false 
+  })
+  currentDate.value = now.toLocaleDateString('zh-CN', { 
+    year: 'numeric', 
+    month: '2-digit', 
+    day: '2-digit' 
+  }).replace(/\//g, '-')
+  currentWeekday.value = weekDays[now.getDay()]
+}
 
 const fetchUserInfo = async () => {
   try {
@@ -113,8 +134,17 @@ const fetchStats = async () => {
 }
 
 onMounted(() => {
+  updateTime()
+  timer = window.setInterval(updateTime, 1000)
   fetchUserInfo()
   fetchStats()
+})
+
+onUnmounted(() => {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
 })
 </script>
 
@@ -211,21 +241,66 @@ onMounted(() => {
   margin-top: 12px;
 }
 
-.social-link {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: var(--color-canvas-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-fg-muted);
-  transition: all 0.2s;
+.tech-clock {
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(64, 158, 255, 0.1) 0%, rgba(103, 58, 183, 0.1) 100%);
+  border: 1px solid var(--color-border-default);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
 
-  &:hover {
-    background-color: var(--color-accent-subtle);
-    color: var(--color-accent-fg);
-    transform: translateY(-2px);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #409eff, #673ab7, transparent);
+    animation: scan 2s linear infinite;
   }
+
+  @keyframes scan {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.clock-time {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  background: linear-gradient(90deg, #409eff, #673ab7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.clock-date {
+  font-size: 14px;
+  color: var(--color-fg-muted);
+  text-align: center;
+  margin-top: 8px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+}
+
+.clock-weekday {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  text-align: center;
+  margin-top: 4px;
+  padding: 4px 12px;
+  background: var(--color-canvas-subtle);
+  border-radius: 4px;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>
