@@ -13,6 +13,11 @@
     <main class="main-content">
       <div class="github-container">
         <div class="content-wrapper">
+          <!-- 左侧侧边栏 -->
+          <aside class="sidebar-left">
+            <CalendarWidget />
+          </aside>
+
           <!-- 主内容 -->
           <div class="main-area">
             <router-view v-slot="{ Component }">
@@ -23,9 +28,8 @@
           </div>
 
           <!-- 右侧侧边栏 -->
-          <aside class="sidebar">
+          <aside class="sidebar-right">
             <UserCard />
-            <CalendarWidget />
             <CategoryList />
             <TagCloud />
           </aside>
@@ -71,17 +75,25 @@ const themeStore = useThemeStore()
   padding: 32px 24px;
   margin: 0 auto;
   width: 100%;
-  max-width: 1600px;
+  box-sizing: border-box;
 }
 
 .content-wrapper {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 40px;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 24px;
   align-items: start;
 }
 
-.sidebar {
+.sidebar-left {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-right {
   position: sticky;
   top: 80px;
   display: flex;
@@ -93,10 +105,20 @@ const themeStore = useThemeStore()
   min-width: 0;
 }
 
+@media (max-width: 1400px) {
+  .content-wrapper {
+    grid-template-columns: 260px 1fr 260px;
+  }
+}
+
 @media (max-width: 1200px) {
   .content-wrapper {
     grid-template-columns: 1fr 260px;
     gap: 24px;
+  }
+
+  .sidebar-left {
+    display: none;
   }
 }
 
@@ -105,7 +127,11 @@ const themeStore = useThemeStore()
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
+  .sidebar-left {
+    display: none;
+  }
+
+  .sidebar-right {
     position: static;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -117,9 +143,14 @@ const themeStore = useThemeStore()
     padding: 0 16px;
   }
 
-  .sidebar {
+  .sidebar-right {
     display: flex;
     flex-direction: column;
   }
+}
+
+.github-container {
+  width: 100%;
+  max-width: 100%;
 }
 </style>

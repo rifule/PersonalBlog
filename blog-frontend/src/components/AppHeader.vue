@@ -4,7 +4,7 @@
       <!-- Logo -->
       <router-link to="/" class="logo">
         <el-icon size="20" class="logo-icon"><Notebook /></el-icon>
-        <span class="logo-text">编码World</span>
+        <span class="logo-text">CodeBlog</span>
       </router-link>
 
       <!-- 搜索框 -->
@@ -156,6 +156,7 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   gap: 24px;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -164,16 +165,18 @@ const handleLogout = async () => {
 
 .search-box {
   flex: 1;
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin-left: 220px;
 }
 
 .nav-menu {
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .header-actions {
   flex-shrink: 0;
+  margin-left: 16px;
 }
 
 .logo {
@@ -307,9 +310,29 @@ const handleLogout = async () => {
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 1400px) {
+  .search-box {
+    margin-left: 180px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .search-box {
+    margin-left: 24px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .search-box {
+    margin-left: 0;
+    max-width: 500px;
+  }
+}
+
 @media (max-width: 1024px) {
   .search-box {
     max-width: 300px;
+    margin-left: 0;
   }
 }
 

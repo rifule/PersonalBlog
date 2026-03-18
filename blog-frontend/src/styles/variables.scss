@@ -17,15 +17,48 @@
   --color-primer-shadow-inset: inset 0 1px 0 rgba(208,215,222,0.2);
   --color-primer-shadow-focus: 0 0 0 3px rgba(9,105,218,0.3);
 
-  // 二次元风格变量
+  // 渐变风格变量
   --anime-primary: #ff6b9d;
   --anime-secondary: #c44569;
   --anime-accent: #f8b500;
   --anime-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
   --anime-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
 
+  // 文章卡片样式
+  --article-card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+  --article-card-border: rgba(209, 213, 219, 0.5);
+  --article-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --article-card-hover-bg: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(243, 244, 246, 0.95) 100%);
+  --article-card-hover-border: rgba(147, 197, 253, 0.6);
+  --article-card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 0 16px rgba(59, 130, 246, 0.15);
+
+  // 分页样式 - 明亮主题 (淡蓝色)
+  --pagination-btn-bg: transparent;
+  --pagination-btn-border: rgba(209, 213, 219, 0.8);
+  --pagination-btn-color: var(--color-fg-default);
+  --pagination-btn-hover-bg: rgba(59, 130, 246, 0.1);
+  --pagination-btn-disabled-color: var(--color-fg-muted);
+  --pagination-active-bg: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  --pagination-active-color: #ffffff;
+  --pagination-active-shadow: 0 0 12px rgba(96, 165, 250, 0.4);
+  --pagination-hover-bg: rgba(59, 130, 246, 0.08);
+  --pagination-hover-border: rgba(59, 130, 246, 0.3);
+
   // 背景透明度
   --bg-opacity: 0.1;
+
+  // 装饰器和特效 - 明亮主题
+  --decoration-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  --decoration-border: 1px solid rgba(59, 130, 246, 0.2);
+  --decoration-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+  --card-decoration-bg: rgba(255, 255, 255, 0.5);
+  --card-decoration-border: rgba(209, 213, 219, 0.3);
+  --hover-lift: translateY(-2px);
+  --hover-scale: scale(1.02);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-glow: 0 4px 20px rgba(59, 130, 246, 0.15);
+  --widget-hover-glow: 0 0 15px rgba(59, 130, 246, 0.2);
+  --floating-animation: float 3s ease-in-out infinite;
 }
 
 .dark {
@@ -46,12 +79,45 @@
   --color-primer-shadow-inset: 0 0 transparent;
   --color-primer-shadow-focus: 0 0 0 3px rgba(31,111,235,0.3);
   
-  // 暗色模式二次元风格
+  // 暗色模式风格
   --anime-primary: #ff8fab;
   --anime-secondary: #fb6f92;
   --anime-accent: #ffd60a;
   --anime-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --anime-shadow: 0 4px 15px rgba(255, 143, 171, 0.3);
+
+  // 文章卡片样式 - 暗色主题保持原样
+  --article-card-bg: rgba(255, 255, 255, 0.03);
+  --article-card-border: rgba(255, 255, 255, 0.1);
+  --article-card-shadow: none;
+  --article-card-hover-bg: rgba(255, 255, 255, 0.05);
+  --article-card-hover-border: rgba(100, 200, 255, 0.3);
+  --article-card-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 16px rgba(100, 200, 255, 0.1);
+
+  // 分页样式 - 暗色主题 (粉色渐变)
+  --pagination-btn-bg: transparent;
+  --pagination-btn-border: rgba(255, 255, 255, 0.1);
+  --pagination-btn-color: var(--color-fg-default);
+  --pagination-btn-hover-bg: rgba(236, 72, 153, 0.15);
+  --pagination-btn-disabled-color: var(--color-fg-muted);
+  --pagination-active-bg: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+  --pagination-active-color: #ffffff;
+  --pagination-active-shadow: 0 0 12px rgba(244, 114, 182, 0.5);
+  --pagination-hover-bg: rgba(236, 72, 153, 0.1);
+  --pagination-hover-border: rgba(236, 72, 153, 0.4);
+
+  // 装饰器和特效 - 暗色主题
+  --decoration-glow: 0 0 20px rgba(236, 72, 153, 0.3);
+  --decoration-border: 1px solid rgba(236, 72, 153, 0.2);
+  --decoration-gradient: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(244, 114, 182, 0.1) 100%);
+  --card-decoration-bg: rgba(255, 255, 255, 0.03);
+  --card-decoration-border: rgba(255, 255, 255, 0.1);
+  --hover-lift: translateY(-2px);
+  --hover-scale: scale(1.02);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-glow: 0 4px 20px rgba(236, 72, 153, 0.15);
+  --widget-hover-glow: 0 0 15px rgba(236, 72, 153, 0.2);
+  --floating-animation: float 3s ease-in-out infinite;
 }
 
 // 通用样式
@@ -102,7 +168,7 @@
   }
 }
 
-// 二次元装饰元素
+// 装饰元素
 .anime-decoration {
   position: relative;
   

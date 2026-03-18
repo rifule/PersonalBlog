@@ -6,9 +6,9 @@
       <span class="anime-decoration"></span>
     </h3>
 
-    <div class="tag-items" v-if="tags.length > 0">
+    <div class="tag-items" v-if="list.length > 0">
       <router-link
-        v-for="tag in tags"
+        v-for="tag in list"
         :key="tag.id"
         :to="`/tag/${tag.id}`"
         class="tag-item"
@@ -30,26 +30,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
+import { onMounted } from 'vue'
 import type { Tag } from '@/types'
 import { getTagList } from '@/api/tag'
+import { useListFetch } from '@/composables/useFetch'
 
-const tags = ref<Tag[]>([])
-const loading = ref(false)
-
-const fetchTags = async () => {
-  loading.value = true
-  try {
-    const res = await getTagList()
-    tags.value = res.data
-  } catch (error) {
-    ElMessage.error('获取标签列表失败')
-    tags.value = []
-  } finally {
-    loading.value = false
-  }
-}
+const { list, loading, execute: fetchTags } = useListFetch<Tag>(getTagList, {
+  filterEmpty: true,
+  emptyField: 'articleCount'
+})
 
 onMounted(() => {
   fetchTags()
@@ -85,11 +74,11 @@ onMounted(() => {
   font-size: 13px;
   text-decoration: none;
   border: 1px solid;
-  transition: all 0.2s;
+  transition: var(--transition-smooth);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: var(--hover-lift);
+    box-shadow: var(--widget-hover-glow);
     text-decoration: none;
   }
 }

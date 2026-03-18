@@ -98,20 +98,45 @@ const saveTag = async () => {
 
   saving.value = true
   try {
+    // 确保颜色是十六进制格式
+    let color = form.value.color || '#409EFF'
+    // 如果颜色是 rgba 格式，转换为十六进制
+    if (color.startsWith('rgba') || color.startsWith('rgb')) {
+      color = rgbaToHex(color)
+    }
+    const tagData = {
+      name: form.value.name,
+      color: color
+    }
+    console.log('Sending tag data:', tagData)
+
     if (isEdit.value && form.value.id) {
-      await updateTag(form.value.id, form.value)
+      await updateTag(form.value.id, tagData)
       ElMessage.success('更新成功')
     } else {
-      await createTag(form.value)
+      await createTag(tagData)
       ElMessage.success('创建成功')
     }
     showDialog.value = false
     fetchTags()
   } catch (error) {
     ElMessage.error('操作失败')
+    console.error('Save tag error:', error)
   } finally {
     saving.value = false
   }
+}
+
+// 将 rgba 转换为十六进制颜色
+const rgbaToHex = (rgba: string): string => {
+  const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+  if (match) {
+    const r = parseInt(match[1]).toString(16).padStart(2, '0')
+    const g = parseInt(match[2]).toString(16).padStart(2, '0')
+    const b = parseInt(match[3]).toString(16).padStart(2, '0')
+    return `#${r}${g}${b}`
+  }
+  return '#409EFF'
 }
 
 const deleteTag = async (id: number) => {

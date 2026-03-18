@@ -70,7 +70,6 @@ CREATE TABLE tb_article (
     cover VARCHAR(255) COMMENT '封面图URL',
     author_id BIGINT NOT NULL COMMENT '作者ID',
     category_id BIGINT NOT NULL COMMENT '分类ID',
-    tags VARCHAR(200) COMMENT '标签（逗号分隔）',
     is_top TINYINT NOT NULL DEFAULT 0 COMMENT '是否置顶: 0=否, 1=是',
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -81,6 +80,22 @@ CREATE TABLE tb_article (
     KEY idx_create_time (create_time),
     FULLTEXT KEY ft_title_content (title, content)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='文章表';
+
+-- ============================================
+-- 4.1 文章标签关联表
+-- ============================================
+DROP TABLE IF EXISTS tb_article_tag;
+CREATE TABLE tb_article_tag (
+    id BIGINT NOT NULL AUTO_INCREMENT COMMENT '关联ID',
+    article_id BIGINT NOT NULL COMMENT '文章ID',
+    tag_id BIGINT NOT NULL COMMENT '标签ID',
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    deleted TINYINT NOT NULL DEFAULT 0 COMMENT '逻辑删除: 0=未删除, 1=已删除',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_article_tag (article_id, tag_id),
+    KEY idx_article_id (article_id),
+    KEY idx_tag_id (tag_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='文章标签关联表';
 
 -- ============================================
 -- 5. 评论表

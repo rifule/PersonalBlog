@@ -6,9 +6,9 @@
       <span class="anime-decoration"></span>
     </h3>
 
-    <div class="category-items" v-if="categories.length > 0">
+    <div class="category-items" v-if="list.length > 0">
       <router-link
-        v-for="category in categories"
+        v-for="category in list"
         :key="category.id"
         :to="`/category/${category.id}`"
         class="category-item"
@@ -32,26 +32,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
+import { onMounted } from 'vue'
 import type { Category } from '@/types'
 import { getCategoryList } from '@/api/category'
+import { useListFetch } from '@/composables/useFetch'
 
-const categories = ref<Category[]>([])
-const loading = ref(false)
-
-const fetchCategories = async () => {
-  loading.value = true
-  try {
-    const res = await getCategoryList()
-    categories.value = res.data
-  } catch (error) {
-    ElMessage.error('获取分类列表失败')
-    categories.value = []
-  } finally {
-    loading.value = false
-  }
-}
+const { list, loading, execute: fetchCategories } = useListFetch<Category>(getCategoryList, {
+  filterEmpty: true,
+  emptyField: 'articleCount'
+})
 
 onMounted(() => {
   fetchCategories()
@@ -86,10 +75,12 @@ onMounted(() => {
   border-radius: 6px;
   color: var(--color-fg-default);
   text-decoration: none;
-  transition: all 0.2s;
+  transition: var(--transition-smooth);
 
   &:hover {
-    background-color: var(--color-canvas-subtle);
+    background: var(--decoration-gradient);
+    transform: var(--hover-lift);
+    box-shadow: var(--widget-hover-glow);
     text-decoration: none;
   }
 }
@@ -107,9 +98,6 @@ onMounted(() => {
 .category-count {
   font-size: 12px;
   color: var(--color-fg-muted);
-  background-color: var(--color-canvas-subtle);
-  padding: 2px 8px;
-  border-radius: 10px;
 }
 
 .loading-state {

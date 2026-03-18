@@ -27,6 +27,17 @@
 
         <p class="article-summary">{{ article.summary }}</p>
 
+        <div class="article-tags" v-if="article.tags && article.tags.length > 0">
+          <el-tag
+            v-for="(tag, index) in article.tags"
+            :key="index"
+            size="small"
+            class="tag-item"
+          >
+            {{ tag }}
+          </el-tag>
+        </div>
+
         <div class="article-footer">
           <router-link :to="`/article/${article.id}`" class="read-more">
             阅读全文
@@ -67,7 +78,7 @@ import dayjs from 'dayjs'
 
 const articles = ref<ArticleListVO[]>([])
 const pageNum = ref(1)
-const pageSize = ref(10)
+const pageSize = ref(5)
 const total = ref(0)
 const loading = ref(false)
 
@@ -109,15 +120,16 @@ onMounted(() => fetchArticles())
 .article-card {
   padding: 24px;
   transition: all 0.3s;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--article-card-bg);
+  border: 1px solid var(--article-card-border);
   border-radius: 12px;
+  box-shadow: var(--article-card-shadow);
 
   &:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 16px rgba(100, 200, 255, 0.1);
+    box-shadow: var(--article-card-hover-shadow);
     transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(100, 200, 255, 0.3);
+    background: var(--article-card-hover-bg);
+    border-color: var(--article-card-hover-border);
   }
 }
 
@@ -170,11 +182,28 @@ onMounted(() => fetchArticles())
   font-size: 15px;
   color: var(--color-fg-muted);
   line-height: 1.7;
-  margin: 0 0 16px 0;
+  margin: 0 0 12px 0;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  :deep(.el-tag) {
+    background: var(--color-accent-subtle);
+    border-color: var(--color-accent-fg);
+    color: var(--color-accent-fg);
+  }
+
+  .tag-item {
+    border-radius: 12px;
+  }
 }
 
 .article-footer {
@@ -215,19 +244,19 @@ onMounted(() => fetchArticles())
     .btn-next {
       padding: 0 16px;
       font-size: 14px;
-      color: var(--color-fg-default);
-      background: transparent;
-      border: 1px solid var(--color-border-default);
+      color: var(--pagination-btn-color);
+      background: var(--pagination-btn-bg);
+      border: 1px solid var(--pagination-btn-border);
       border-radius: 6px;
       height: 32px;
       line-height: 32px;
 
-      &:hover {
-        background: var(--color-canvas-subtle);
+      &:hover:not(.is-disabled) {
+        background: var(--pagination-btn-hover-bg);
       }
 
       &.is-disabled {
-        color: var(--color-fg-muted);
+        color: var(--pagination-btn-disabled-color);
         cursor: not-allowed;
       }
     }
@@ -242,18 +271,20 @@ onMounted(() => fetchArticles())
         line-height: 32px;
         border-radius: 6px;
         font-size: 14px;
-        color: var(--color-fg-default);
-        background: transparent;
+        color: var(--pagination-btn-color);
+        background: var(--pagination-btn-bg);
+        border: 1px solid transparent;
+        transition: all 0.2s;
 
         &.is-active {
-          background: linear-gradient(135deg, rgba(150, 157, 161, 0.8), rgba(183, 172, 23, 0.8));
-          color: hsla(0, 0%, 99%, 0.979);
-          box-shadow: 0 0 12px rgba(69, 168, 38, 0.4);
+          background: var(--pagination-active-bg);
+          color: var(--pagination-active-color);
+          box-shadow: var(--pagination-active-shadow);
         }
 
         &:hover:not(.is-active) {
-          background: rgba(158, 148, 148, 0.08);
-          border-color: rgba(16, 100, 146, 0.3);
+          background: var(--pagination-hover-bg);
+          border-color: var(--pagination-hover-border);
         }
       }
     }

@@ -30,9 +30,6 @@ public class Article {
     @TableField("category_id")
     private Long categoryId;
 
-    @TableField("tags")
-    private String tags;
-
     @TableField("is_top")
     private Boolean isTop;
 

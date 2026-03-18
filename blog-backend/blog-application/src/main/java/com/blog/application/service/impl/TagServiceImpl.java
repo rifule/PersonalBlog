@@ -3,9 +3,8 @@ package com.blog.application.service.impl;
 import com.blog.application.service.TagService;
 import com.blog.common.exception.BusinessException;
 import com.blog.common.result.ResultCode;
-import com.blog.domain.entity.Article;
 import com.blog.domain.entity.Tag;
-import com.blog.domain.repository.ArticleRepository;
+import com.blog.domain.repository.ArticleTagRepository;
 import com.blog.domain.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,12 @@ import java.util.List;
 public class TagServiceImpl implements TagService {
 
     private final TagRepository tagRepository;
-    private final ArticleRepository articleRepository;
+    private final ArticleTagRepository articleTagRepository;
 
     @Override
     @Transactional
     public Tag createTag(Tag tag) {
+        System.out.println("Creating tag: name=" + tag.getName() + ", color=" + tag.getColor());
         tagRepository.insert(tag);
         return tag;
     }
@@ -30,6 +30,7 @@ public class TagServiceImpl implements TagService {
     @Override
     @Transactional
     public Tag updateTag(Long id, Tag tag) {
+        System.out.println("Updating tag: id=" + id + ", name=" + tag.getName() + ", color=" + tag.getColor());
         Tag existing = tagRepository.selectById(id);
         if (existing == null) {
             throw new BusinessException(ResultCode.ERROR);
@@ -53,18 +54,8 @@ public class TagServiceImpl implements TagService {
         List<Tag> tags = tagRepository.findAllOrderByCreateTimeDesc();
         // 统计每个标签的文章数量
         for (Tag tag : tags) {
-            int count = 0;
-            // 查询所有文章，检查是否包含该标签
-            List<Article> articles = articleRepository.selectList(
-                new com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper<Article>()
-                    .isNotNull(Article::getTags)
-            );
-            for (Article article : articles) {
-                if (article.getTags() != null && article.getTags().contains(tag.getName())) {
-                    count++;
-                }
-            }
-            tag.setArticleCount(count);
+            List<Long> articleIds = articleTagRepository.selectArticleIdsByTagId(tag.getId());
+            tag.setArticleCount(articleIds.size());
         }
         return tags;
     }

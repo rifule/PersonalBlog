@@ -3,6 +3,7 @@ package com.blog.domain.vo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ArticleListVO {
@@ -13,6 +14,7 @@ public class ArticleListVO {
     private String cover;
     private String authorName;
     private String categoryName;
-    private String tags;
+    private List<Long> tagIds;
+    private List<String> tags;
     private LocalDateTime createTime;
 }

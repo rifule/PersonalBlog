@@ -180,6 +180,18 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+
+  :deep(.el-button) {
+    background: var(--color-canvas-subtle);
+    border-color: var(--color-border-default);
+    color: var(--color-fg-default);
+
+    &:hover {
+      background: var(--color-accent-subtle);
+      border-color: var(--color-accent-fg);
+      color: var(--color-accent-fg);
+    }
+  }
 }
 
 .current-month {
@@ -209,11 +221,12 @@ onMounted(() => {
   justify-content: center;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: var(--transition-smooth);
   position: relative;
 
   &:hover {
-    background-color: var(--color-canvas-subtle);
+    background: var(--decoration-gradient);
+    transform: var(--hover-lift);
   }
 
   &.other-month {

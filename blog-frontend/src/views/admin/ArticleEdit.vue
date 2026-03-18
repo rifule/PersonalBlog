@@ -35,7 +35,7 @@
           </el-select>
 
           <el-select
-            v-model="form.tags"
+            v-model="form.tagIds"
             multiple
             placeholder="选择标签"
             clearable
@@ -47,7 +47,7 @@
               v-for="tag in tags"
               :key="tag.id"
               :label="tag.name"
-              :value="tag.name"
+              :value="tag.id"
             >
               <div class="tag-option">
                 <span class="tag-color" :style="{ backgroundColor: tag.color || '#909399' }"></span>
@@ -106,12 +106,13 @@ const categories = ref<Category[]>([])
 const tags = ref<Tag[]>([])
 const loading = ref(false)
 
-const form = ref<Partial<Article>>({
+const form = ref<Partial<Article> & { tagIds?: number[] }>({
   title: '',
   content: '',
   summary: '',
   categoryId: undefined,
-  tags: []
+  tags: [],
+  tagIds: []
 })
 
 const renderedContent = computed(() => {
@@ -126,10 +127,10 @@ const fetchArticle = async () => {
   try {
     const res = await getArticleById(id)
     const article = res.data as any
-    const tags = article.tags
+    // 后端返回 tagIds 和 tags，直接使用
     form.value = {
       ...article,
-      tags: typeof tags === 'string' ? tags.split(',') : tags || []
+      tagIds: article.tagIds || []
     }
   } catch (error) {
     ElMessage.error('获取文章失败')
@@ -166,9 +167,15 @@ const saveArticle = async () => {
 
   saving.value = true
   try {
+    // 构建提交数据，使用 tagIds
     const articleData = {
-      ...form.value,
-      tags: Array.isArray(form.value.tags) ? form.value.tags.join(',') : ''
+      title: form.value.title,
+      content: form.value.content,
+      summary: form.value.summary,
+      cover: form.value.cover,
+      categoryId: form.value.categoryId,
+      tagIds: form.value.tagIds || [],
+      isTop: form.value.isTop
     } as any
 
     if (isEdit.value && route.params.id) {
@@ -186,10 +193,10 @@ const saveArticle = async () => {
   }
 }
 
-onMounted(() => {
-  fetchCategories()
-  fetchTags()
-  fetchArticle()
+onMounted(async () => {
+  await fetchCategories()
+  await fetchTags()
+  await fetchArticle()
 })
 </script>
 

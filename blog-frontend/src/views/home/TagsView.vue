@@ -103,8 +103,10 @@ const fetchTags = async () => {
   loading.value = true
   try {
     const res = await getTagList()
-    // 按文章数量排序
-    tags.value = res.data.sort((a: Tag, b: Tag) => (b.articleCount || 0) - (a.articleCount || 0))
+    // 过滤掉文章数为0或null的标签，并按文章数量排序
+    tags.value = res.data
+      .filter((tag: Tag) => tag.articleCount && tag.articleCount > 0)
+      .sort((a: Tag, b: Tag) => (b.articleCount || 0) - (a.articleCount || 0))
     // 获取每个标签下的文章
     for (const tag of tags.value) {
       await fetchTagArticles(tag.id)

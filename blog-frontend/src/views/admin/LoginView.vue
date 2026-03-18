@@ -107,7 +107,7 @@ const handleLogin = async () => {
         ElMessage.success('登录成功')
         router.push('/admin')
       } else {
-        ElMessage.error(result.message || '登录失败')
+        ElMessage.error('用户名或密码错误')
       }
     }
   })

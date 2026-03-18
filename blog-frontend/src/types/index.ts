@@ -27,6 +27,7 @@ export interface Article {
   authorName: string
   categoryId: number
   categoryName: string
+  tagIds: number[]
   tags: string[]
   isTop: number
   createTime: string
@@ -40,6 +41,7 @@ export interface ArticleListVO {
   cover: string
   authorName: string
   categoryName: string
+  tagIds: number[]
   tags: string[]
   isTop?: number
   createTime: string

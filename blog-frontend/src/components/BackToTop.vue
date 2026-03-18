@@ -80,16 +80,16 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s;
+  box-shadow: var(--sidebar-glow);
+  transition: var(--transition-smooth);
   z-index: 1000;
   padding: 0;
   overflow: hidden;
 
   &:hover {
-    background-color: var(--color-accent-subtle);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background: var(--decoration-gradient);
+    transform: var(--hover-lift);
+    box-shadow: var(--decoration-glow);
 
     .progress-ring-circle {
       stroke: var(--color-accent-fg);

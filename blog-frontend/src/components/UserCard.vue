@@ -123,10 +123,12 @@ const fetchStats = async () => {
       getCategoryList(),
       getTagList()
     ])
+    // 只统计有文章的标签
+    const validTags = tagsRes.data.filter((tag: any) => tag.articleCount && tag.articleCount > 0)
     stats.value = {
       articleCount: articlesRes.data.total,
       categoryCount: categoriesRes.data.length,
-      tagCount: tagsRes.data.length
+      tagCount: validTags.length
     }
   } catch (error) {
     ElMessage.error('获取统计数据失败')
@@ -207,6 +209,15 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  cursor: default;
+
+  &:hover {
+    background: var(--decoration-gradient);
+    transform: var(--hover-lift);
+  }
 }
 
 .stat-value {
@@ -244,8 +255,8 @@ onUnmounted(() => {
 .tech-clock {
   margin-top: 16px;
   padding: 16px;
-  background: linear-gradient(135deg, rgba(64, 158, 255, 0.1) 0%, rgba(103, 58, 183, 0.1) 100%);
-  border: 1px solid var(--color-border-default);
+  background: var(--decoration-gradient);
+  border: var(--decoration-border);
   border-radius: 8px;
   position: relative;
   overflow: hidden;
@@ -257,7 +268,7 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #409eff, #673ab7, transparent);
+    background: linear-gradient(90deg, transparent, var(--anime-primary), var(--anime-secondary), transparent);
     animation: scan 2s linear infinite;
   }
 
