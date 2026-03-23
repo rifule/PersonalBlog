@@ -16,7 +16,8 @@ export default defineConfig({
         target: 'http://localhost:8080',
         changeOrigin: true
       }
-    }
+    },
+     allowedHosts: ['slakable-shela-salpingitic.ngrok-free.dev']
   },
   css: {
     preprocessorOptions: {
@@ -24,5 +25,5 @@ export default defineConfig({
         additionalData: `@use "@/styles/variables.scss" as *;`
       }
     }
-  }
+  },
 })

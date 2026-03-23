@@ -17,6 +17,12 @@ export const getArticlesByCategory = (categoryId: number, pageNum = 1, pageSize 
   })
 }
 
+export const getArticlesByTag = (tagId: number, pageNum = 1, pageSize = 100): Promise<ApiResponse<PageResult<ArticleListVO>>> => {
+  return request.get(`/tags/${tagId}/articles`, {
+    params: { pageNum, pageSize }
+  })
+}
+
 export const searchArticles = (keyword: string, pageNum = 1, pageSize = 10): Promise<ApiResponse<PageResult<ArticleListVO>>> => {
   return request.get('/articles/search', {
     params: { keyword, pageNum, pageSize }

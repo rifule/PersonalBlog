@@ -6,7 +6,27 @@
 
     <template v-else>
       <div class="article-layout">
-        <!-- 左侧文章内容 -->
+        <!-- 左侧关联文章列表 -->
+        <aside class="article-list-sidebar">
+          <div class="article-list-container">
+            <div class="toc-title">相关文章</div>
+            <nav class="article-list-nav">
+              <ul class="article-list">
+                <li v-for="art in allArticles" :key="art.id" :class="['article-item', { 'active': art.id === article.id }]">
+                  <router-link :to="`/article/${art.id}`" class="article-link">
+                    <span class="article-title">{{ art.title }}</span>
+                    <span class="article-meta">{{ formatDate(art.createTime) }}</span>
+                  </router-link>
+                </li>
+              </ul>
+              <div v-if="allArticles.length === 0" class="no-related-articles">
+                暂无相关文章
+              </div>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- 中间文章内容 -->
         <div class="article-main">
           <article class="article-content">
             <header class="article-header">
@@ -51,30 +71,24 @@
         </div>
 
         <!-- 右侧大纲导航 -->
-        <aside class="article-sidebar">
-          <div class="toc-container">
-            <div class="toc-title">此页内容</div>
-            <nav class="toc-nav">
-              <ul class="toc-list">
-                <li v-for="(item, index) in tocItems" :key="index" :class="['toc-item', `toc-level-${item.level}`, { 'active': activeTocId === item.id }]">
-                  <a :href="`#${item.id}`" @click.prevent="scrollToSection(item.id)">{{ item.text }}</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </aside>
+        <TocSidebar
+          ref="tocSidebarRef"
+          :container-ref="articleBody"
+          :offset="100"
+        />
       </div>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, nextTick, onUnmounted } from 'vue'
+import { ref, onMounted, computed, nextTick, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import type { Article } from '@/types'
-import { getArticleById, getArticleList } from '@/api/article'
+import type { Article, ArticleListVO } from '@/types'
+import { getArticleById, getArticlesByTag, getArticleList } from '@/api/article'
 import { renderMarkdown } from '@/utils/markdown'
+import TocSidebar from '@/components/TocSidebar.vue'
 import dayjs from 'dayjs'
 
 const route = useRoute()
@@ -91,15 +105,16 @@ const article = ref<Article>({
   authorName: '',
   categoryId: 0,
   categoryName: '',
+  tagIds: [],
   tags: [],
   isTop: 0,
   createTime: '',
   updateTime: ''
 })
 const nextArticle = ref<Article | null>(null)
+const allArticles = ref<Article[]>([])
 const loading = ref(false)
-const tocItems = ref<Array<{ id: string; text: string; level: number }>>([])
-const activeTocId = ref('')
+const tocSidebarRef = ref<InstanceType<typeof TocSidebar>>()
 
 const formatDate = (date: string) => {
   return dayjs(date).format('YYYY-MM-DD HH:mm')
@@ -124,53 +139,11 @@ const renderedContent = computed(() => {
   return renderMarkdown(article.value.content || '')
 })
 
-// 生成大纲
-const generateToc = () => {
-  nextTick(() => {
-    if (!articleBody.value) return
-
-    const headings = articleBody.value.querySelectorAll('h1, h2, h3, h4, h5, h6')
-    const items: Array<{ id: string; text: string; level: number }> = []
-
-    headings.forEach((heading, index) => {
-      const level = parseInt(heading.tagName[1])
-      const text = heading.textContent || ''
-      const id = `heading-${index}`
-      heading.id = id
-      items.push({ id, text, level })
-    })
-
-    tocItems.value = items
-  })
-}
-
-// 滚动到指定章节
-const scrollToSection = (id: string) => {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-}
-
-// 监听滚动，高亮当前章节
-const handleScroll = () => {
-  if (!articleBody.value || tocItems.value.length === 0) return
-
-  const scrollTop = window.scrollY + 100
-  let currentId = ''
-
-  for (const item of tocItems.value) {
-    const element = document.getElementById(item.id)
-    if (element) {
-      const offsetTop = element.offsetTop
-      if (scrollTop >= offsetTop) {
-        currentId = item.id
-      }
-    }
-  }
-
-  activeTocId.value = currentId
-}
+// 监听文章内容变化，刷新大纲
+watch(renderedContent, async () => {
+  await nextTick()
+  tocSidebarRef.value?.refresh()
+})
 
 const fetchArticle = async () => {
   const id = parseInt(route.params.id as string)
@@ -183,11 +156,7 @@ const fetchArticle = async () => {
   try {
     const res = await getArticleById(id)
     article.value = res.data
-    // 等待 DOM 更新后再生成大纲
-    await nextTick()
-    setTimeout(() => {
-      generateToc()
-    }, 100)
+    await fetchRelatedArticles()
     await fetchNextArticle(id)
   } catch (error) {
     ElMessage.error('获取文章详情失败')
@@ -196,14 +165,70 @@ const fetchArticle = async () => {
   }
 }
 
+// 获取关联文章（具有相同标签的文章）
+const fetchRelatedArticles = async () => {
+  try {
+    // 获取当前文章的标签
+    const currentTagIds = article.value.tagIds || []
+    if (currentTagIds.length === 0) {
+      allArticles.value = []
+      return
+    }
+
+    // 使用第一个标签获取关联文章
+    const res = await getArticlesByTag(currentTagIds[0], 1, 100)
+    const articles: ArticleListVO[] = res.data.list || []
+    
+    // 过滤掉当前文章，并限制数量
+    const filteredArticles = articles
+      .filter((art) => art.id !== article.value.id)
+      .slice(0, 20)
+    
+    allArticles.value = filteredArticles.map((art) => ({
+      id: art.id,
+      title: art.title,
+      content: '',
+      summary: art.summary,
+      cover: art.cover,
+      authorId: 0,
+      authorName: art.authorName,
+      categoryId: 0,
+      categoryName: art.categoryName,
+      tagIds: art.tagIds,
+      tags: art.tags,
+      isTop: art.isTop || 0,
+      createTime: art.createTime,
+      updateTime: ''
+    }))
+  } catch (error) {
+    allArticles.value = []
+  }
+}
+
 // 获取下一篇文章
 const fetchNextArticle = async (currentId: number) => {
   try {
     const res = await getArticleList(1, 100)
-    const articles = res.data.list
-    const currentIndex = articles.findIndex((a: Article) => a.id === currentId)
+    const articles: ArticleListVO[] = res.data.list
+    const currentIndex = articles.findIndex((a: ArticleListVO) => a.id === currentId)
     if (currentIndex !== -1 && currentIndex < articles.length - 1) {
-      nextArticle.value = articles[currentIndex + 1]
+      const nextArt = articles[currentIndex + 1]
+      nextArticle.value = {
+        id: nextArt.id,
+        title: nextArt.title,
+        content: '',
+        summary: nextArt.summary,
+        cover: nextArt.cover,
+        authorId: 0,
+        authorName: nextArt.authorName,
+        categoryId: 0,
+        categoryName: nextArt.categoryName,
+        tagIds: nextArt.tagIds,
+        tags: nextArt.tags,
+        isTop: nextArt.isTop || 0,
+        createTime: nextArt.createTime,
+        updateTime: ''
+      }
     } else {
       nextArticle.value = null
     }
@@ -212,14 +237,27 @@ const fetchNextArticle = async (currentId: number) => {
   }
 }
 
-onMounted(() => {
+const fetchArticleData = () => {
   fetchArticle()
-  window.addEventListener('scroll', handleScroll)
+}
+
+// 滚动到页面顶部
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
+
+onMounted(() => {
+  fetchArticleData()
 })
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+watch(() => route.params.id, () => {
+  fetchArticleData()
+  scrollToTop()
 })
+
 </script>
 
 <style scoped lang="scss">
@@ -236,7 +274,8 @@ onUnmounted(() => {
 
 .article-layout {
   display: flex;
-  max-width: 1400px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 24px;
   gap: 24px;
@@ -457,81 +496,82 @@ onUnmounted(() => {
   transition: color 0.3s;
 }
 
-// 右侧大纲导航
-.article-sidebar {
-  width: 280px;
+// 左侧全部文章列表
+.article-list-sidebar {
+  width: 220px;
   flex-shrink: 0;
-  position: sticky;
-  top: 80px;
-  height: fit-content;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  position: static;
+  height: auto;
 }
 
-.toc-container {
+.article-list-container {
   background-color: var(--color-canvas-subtle);
   border-radius: 8px;
   padding: 20px;
+
+  .toc-title {
+    text-align: center;
+    font-size: 16px;
+    margin: 8px 0;
+    font-weight: 600;
+  }
 }
 
-.toc-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-fg-default);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-border-default);
+.article-list-nav {
+  max-height: none;
+  overflow-y: visible;
 }
 
-.toc-list {
+.article-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.toc-item {
-  margin: 4px 0;
+.article-item {
+  margin: 8px 0;
 
-  a {
+  .article-link {
     display: block;
-    padding: 6px 12px;
-    color: var(--color-fg-muted);
+    padding: 10px 12px;
+    color: var(--color-fg-default);
     text-decoration: none;
-    font-size: 13px;
-    line-height: 1.5;
     border-radius: 4px;
     transition: all 0.2s;
 
     &:hover {
-      color: var(--color-accent-fg);
       background-color: var(--color-accent-subtle);
     }
   }
 
-  &.active a {
-    color: var(--color-accent-fg);
+  &.active .article-link {
     background-color: var(--color-accent-subtle);
+    color: var(--color-accent-fg);
     font-weight: 500;
+  }
+
+  .article-title {
+    font-size: 14px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  .article-meta {
+    font-size: 12px;
+    color: var(--color-fg-muted);
+    display: block;
   }
 }
 
-.toc-level-1 {
-  font-weight: 600;
-}
-
-.toc-level-2 {
-  padding-left: 12px;
-}
-
-.toc-level-3 {
-  padding-left: 24px;
-}
-
-.toc-level-4,
-.toc-level-5,
-.toc-level-6 {
-  padding-left: 36px;
-  font-size: 12px;
+.no-related-articles {
+  padding: 20px;
+  text-align: center;
+  color: var(--color-fg-muted);
+  font-size: 14px;
 }
 
 // 响应式
@@ -547,6 +587,8 @@ onUnmounted(() => {
 
 @media (max-width: 768px) {
   .article-layout {
+    width: 100%;
+    max-width: 100%;
     padding: 16px;
   }
 
